@@ -1,0 +1,50 @@
+<div class="login-page">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+         
+            <h1>Gerenciador de Projetos</h1>
+        
+            <!--Card content-->
+            <mat-card-content class="px-lg-5 pt-0">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+
+                    <!-- User -->
+                    <div class="md-form">
+                       
+                        <input type="text" id="loginFormUser" formControlName="username" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Name"/>
+                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                            <div *ngIf="f.username.errors.required">{{'Username is required'}}</div>
+                        </div>
+
+                    </div>
+                <br>
+                    <!-- Password -->
+                    <div class="md-form">
+            
+                        <input type="password" id="loginFormPassword" formControlName="password" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"/>
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">{{'Password is required'}}</div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Sign in button -->
+                    <div class="text-center mt-4">
+                        <button [disabled]="loading" mdbBtn color="info" mdbWavesEffect>
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            {{ 'Log in' }}
+                        </button>
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                        <hr class="hr-light mb-3 mt-4">
+
+                    </div>
+                </form>
+                <!--Card content-->
+            </mat-card-content>
+        </div>
+    </div>
+</div>  

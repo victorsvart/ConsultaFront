@@ -1,0 +1,98 @@
+<c-pagination aria-label="Próximo paciente">
+  <table cTable>
+    <tbody>
+      <tr *ngFor="let paciente of pacientes">
+        <c-accordion [alwaysOpen]="true">
+          <c-accordion-item #item0="cAccordionItem" [visible]="false">
+            <ng-template cTemplateId="accordionHeaderTemplate">
+              <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+                {{ paciente.firstName }} {{ paciente.lastName }}
+              </button>
+            </ng-template>
+            <ng-template cTemplateId="accordionBodyTemplate">
+              <div class="accordion-body">
+                <h2 *ngIf="paciente.consul == ''">Nenhuma Consulta Registrada</h2>
+                <table cTable class="overflow-auto">
+                    <thead>
+                      <th>
+                        RG
+                      </th>
+                      <th>
+                        IDADE
+                      </th>
+                      <th>
+                        ENDEREÇO
+                      </th>
+                      <th>
+                        NASCIMENTO
+                      </th>
+                      <th>
+                        TELEFONE
+                      </th>
+                    
+                    </thead>
+                    <tbody>
+                      <td>
+                        {{paciente.rg}}
+                      </td>
+                      <td>
+                        {{paciente.age}}
+                      </td>
+                      <td>
+                        {{paciente.endereco}}
+                      </td>
+                      <td>
+                        {{paciente.nascimento}}
+                      </td>
+                      <td>
+                        {{paciente.telefone}}
+                      </td>
+                    </tbody>
+                  
+                </table>
+                <c-accordion>
+                  <c-accordion-item #item0="cAccordionItem" [visible]="false"> 
+                    <ng-template cTemplateId="accordionHeaderTemplate">
+                      <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+                        Consultas
+                      </button>
+                    </ng-template>
+                    <ng-template cTemplateId="accordionBodyTemplate">
+                      <div class="accordion-body">
+                        
+                        <table cTable>
+                          <thead>
+                            <th>
+                              DATA DA CONSULTA
+                            </th>
+                            <th>
+                              HORÁRIO DA CONSULTA
+                            </th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let consultas of paciente.consul">
+                              <td>
+                                {{consultas.dataConsulta}} 
+                              </td>
+                              <td>
+                                {{consultas.horarioConsulta}}
+                              </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        
+                      </div>
+                    </ng-template>
+              
+                  </c-accordion-item>
+              </c-accordion>
+              </div>
+            </ng-template>
+          </c-accordion-item>
+        </c-accordion>
+      </tr>
+    </tbody>
+  </table>
+  
+
+</c-pagination>

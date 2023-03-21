@@ -1,0 +1,45 @@
+ <div [formGroup]="form" data-toggle="validator"role="form" class="form-group">
+    <label for="">Primeiro Nome</label>
+        <c-input-group class="mb-3" >
+                <input aria-describedby="basic-addon1"
+                    aria-label="Primeiro Nome"
+                    cFormControl
+                    placeholder="José"
+                    formControlName="firstName"
+                />
+    </c-input-group>
+    <label for="">Segundo Nome</label>
+        <c-input-group class="mb-3" >
+            <input aria-describedby="basic-addon2"
+                    aria-label="Sobrenome"
+                    cFormControl
+                    placeholder="Oliveira dos Santos"
+                    formControlName="lastName"
+            />
+        </c-input-group>
+    <label cLabel >Endereço</label>
+        <c-input-group class="mb-3">
+            <input aria-describedby="basic-addon3" cFormControl id="basic-url"
+                    aria-label="Endereço"
+                    placeholder="Nome da rua, número da residencia e complementos"
+                    formControlName="endereco" />
+        </c-input-group>
+    <label cLabel >Idade</label>
+        <c-input-group class="mb-3">
+            <input aria-label="Idade" placeholder="31" cFormControl formControlName="age"/>
+        </c-input-group>
+    
+        
+    <label cLabel >Telefone</label>
+        <c-input-group class="mb-3">
+                <input type="tel" aria-label="Telefone" cFormControl placeholder="(xx)xxxxx-xxxx" mask="(xx)xxxxx-xxxx" formControlName="telefone"/>
+        </c-input-group>
+
+    <label cLabel >RG</label>
+        <c-input-group class="mb-3">
+                <input type="tel" aria-label="Telefone" cFormControl placeholder="xx.xxx.xxx-x" formControlName="rg"/>
+        </c-input-group>
+</div>
+<button cButton (click)="onSubmit()" color="primary">Registrar Ficha do Paciente</button>
+
+
