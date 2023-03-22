@@ -15,15 +15,20 @@ import {
   TabsModule,
   AccordionModule,
   SharedModule,
-  PaginationModule
+  PaginationModule,
+  UtilitiesModule
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-
+import { ModalModule } from '@coreui/angular';
 import { WidgetsModule } from '../widgets/widgets.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+
 
 @NgModule({
   imports: [
@@ -46,7 +51,14 @@ import { WidgetsModule } from '../widgets/widgets.module';
     WidgetsModule,
     AccordionModule,
     SharedModule,
-    PaginationModule
+    PaginationModule,
+    ModalModule,
+    TableModule,
+    UtilitiesModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatInputModule,
   ],
   declarations: [DashboardComponent]
 })

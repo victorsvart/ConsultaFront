@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddConsultasComponent } from './add-consultas/add-consultas.component';
 import { AddPacientesComponent } from './addPacientes/add-pacientes.component';
+
 
 const routes: Routes = [
   {
@@ -15,7 +17,13 @@ const routes: Routes = [
       data:{
         title: $localize`Adicionar Pacientes`
       }
-
+    },
+    {
+      path : 'AddConsultas',
+      component: AddConsultasComponent,
+      data:{
+        title: $localize`Adicionar Consultas`
+      }
     }
   ]
 } 

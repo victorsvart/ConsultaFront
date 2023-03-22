@@ -69,6 +69,7 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
+  ModalModule,
   
   
   
@@ -78,6 +79,7 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AddPacientesComponent } from './pacientes/addPacientes/add-pacientes.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddConsultasComponent } from './pacientes/add-consultas/add-consultas.component';
 
 
 
@@ -146,6 +148,7 @@ const APP_CONTAINERS = [
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    ModalModule,
 
   ],
   providers: [

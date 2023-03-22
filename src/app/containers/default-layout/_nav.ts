@@ -10,10 +10,15 @@ export const navItems: INavData[] = [
   {
     name: 'Consultas',
     url: '/consultas',
+    iconComponent: { name: 'cil-user' },
     children: [
       {
         name: 'Registrar Paciente',
         url: '/consultas/AddPacientes',
+      },
+      {
+        name:'Registrar Consulta',
+        url: '/consultas/AddConsultas',
       }
     ]
    
