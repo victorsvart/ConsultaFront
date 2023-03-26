@@ -1,7 +1,55 @@
+<c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Modal title</h5>
+    <button (click)="openModal2()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+      <div [formGroup]="form" data-toggle="validator"role="form" class="form-group">
+          <label for="">Data da Consulta</label>
+            <c-input-group>
+              <mat-form-field appearance="fill">
+                  <mat-label>Escolha uma data</mat-label>
+                  <input matInput [matDatepicker]="picker" [value]="consultaData" formControlName="dataConsulta">
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </c-input-group>
+            <label style="margin-top: 20px;" or="">Procedimento</label>
+              <c-input-group class="mb-3">
+                <select  formControlName="procedimento" class="form-control" aria-label="Default select example" cSelect>
+                    <option value="null" selected>-- SELECIONE --</option>
+                  
+                    <option value="{{procedimento}}" *ngFor="let procedimento of procedimentos">{{procedimento}}</option>
+              </select>
+              </c-input-group>     
+          <label style="margin-top: 10px;" or="">Horario da Consulta</label>
+              <c-input-group class="mb-3"style="margin-top: 10px;">
+                  <input aria-describedby="basic-addon2"
+                          [value]="horarioConsulta"
+                          aria-label="Sobrenome"
+                          cFormControl
+                          placeholder="15:00"
+                          formControlName="horarioConsulta"
+                  />
+              </c-input-group>            
+      </div>
+
+
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="openModal2()" cButton color="secondary">
+      Close
+    </button>
+    <button (click)="onSubmit()" type="submit" cButton color="primary">Save changes</button>
+  </c-modal-footer>
+</c-modal>
+
+
 <c-pagination aria-label="Próximo paciente">
   <table cTable>
     <tbody>
-      <tr *ngFor="let paciente of pacientes">
+      <tr *ngFor="let paciente of pacientes; let i = index">
         <c-accordion [alwaysOpen]="true">
           <c-accordion-item #item0="cAccordionItem" [visible]="false">
             <ng-template cTemplateId="accordionHeaderTemplate">
@@ -11,7 +59,7 @@
             </ng-template>
             <ng-template cTemplateId="accordionBodyTemplate">
               <div class="accordion-body">
-                <h2 *ngIf="paciente.consul == ''">Nenhuma Consulta Registrada</h2>
+                <h2 class="text-danger" *ngIf="paciente.consul == ''">Nenhuma Consulta Registrada</h2>
                 <table cTable class="overflow-auto">
                     <thead>
                       <th>
@@ -62,21 +110,38 @@
                         
                         <table cTable>
                           <thead>
+            
                             <th>
                               DATA DA CONSULTA
                             </th>
                             <th>
+                              PROCEDIMENTO
+                            </th>
+                            <th>
                               HORÁRIO DA CONSULTA
                             </th>
+                            <th style="width: 200px;"></th>
+                            <th style="width: 200px;"></th>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let consultas of paciente.consul">
-                              <td>
+                            <tr *ngFor="let consultas of paciente.consul; let z = index"> 
+                            
+                              <td *ngIf="consultas.isDeleted != 1">
                                 {{consultas.dataConsulta}} 
                               </td>
-                              <td>
+                              <td *ngIf="consultas.isDeleted != 1">
+                                {{consultas.procedimento}}
+                              </td>
+                              <td *ngIf="consultas.isDeleted != 1">
                                 {{consultas.horarioConsulta}}
                               </td>
+                              <td style="width: 200px;" *ngIf="consultas.isDeleted != 1">
+                                <button cButton color="primary" (click)="openModal(i, z)" size="sm">Editar Consulta</button>
+                              </td>
+                              <td style="width: 200px;" *ngIf="consultas.isDeleted != 1">
+                                <button cButton color="danger" (click)="deleteConsulta(i, z)" size="sm">Excluir Consulta</button>
+                              </td>
+                              
                           </tr>
                           </tbody>
                         </table>

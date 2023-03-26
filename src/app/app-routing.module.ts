@@ -31,6 +31,11 @@ const routes: Routes = [
           import('./pacientes/add-pacientes.module').then((m) => m.AddPacientesModule), canActivate: [AuthguardService]
       },
       {
+        path: 'calendar',
+        loadChildren : () =>
+          import('./calendar/testcalendar.module').then((m) => m.TestCalendarModule), canActivate: [AuthguardService]
+      },
+      {
         path: 'theme',
         loadChildren: () =>
           import('./views/theme/theme.module').then((m) => m.ThemeModule), canActivate: [AuthguardService]

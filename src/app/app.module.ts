@@ -28,6 +28,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { DateAdapter } from '@angular/material/core';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -69,6 +70,7 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
+  ModalModule,
   
   
   
@@ -78,6 +80,10 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AddPacientesComponent } from './pacientes/addPacientes/add-pacientes.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddConsultasComponent } from './pacientes/add-consultas/add-consultas.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TestCalendarModule } from './calendar/testcalendar.module';
+
 
 
 
@@ -99,6 +105,7 @@ const APP_CONTAINERS = [
     BrowserAnimationsModule,
     AppRoutingModule,
     AvatarModule,
+    FlatpickrModule.forRoot(),
     BreadcrumbModule,
     FooterModule,
     DropdownModule,
@@ -146,6 +153,10 @@ const APP_CONTAINERS = [
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    ModalModule,
+    NgbModule,
+    TestCalendarModule
+   
 
   ],
   providers: [

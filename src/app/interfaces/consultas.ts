@@ -5,6 +5,8 @@ export interface consultas{
     
     horaConsulta: string;
 
+    procedimento: string;
+
     isDeleted: number;
     
 
