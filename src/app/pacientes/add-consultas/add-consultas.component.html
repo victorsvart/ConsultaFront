@@ -15,6 +15,13 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </c-input-group>
+            <label style="margin-top: 20px;" or="">Procedimento</label>
+                <c-input-group class="mb-3"style="margin-top: 10px;">
+                    <select  formControlName="procedimento" class="form-control" aria-label="Default select example" cSelect>
+                        <option value="null" selected>-- SELECIONE --</option>
+                        <option value="{{procedimento}}" *ngFor="let procedimento of procedimentos">{{procedimento}}</option>
+                    </select>
+                </c-input-group>        
             <label style="margin-top: 20px;" or="">Horario da Consulta</label>
                 <c-input-group class="mb-3"style="margin-top: 10px;">
                     <input aria-describedby="basic-addon2"

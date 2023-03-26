@@ -12,7 +12,6 @@ export interface Pacientes {
     nascimento: Date;
     laudo: string;
     profissao: string;
-    procedimentosRealizados: procedimentos[];
-    consultas: consultas[];
+    consul: consultas[];
       
 }

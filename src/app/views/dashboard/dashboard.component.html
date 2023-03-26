@@ -6,7 +6,7 @@
   <c-modal-body>
       <div [formGroup]="form" data-toggle="validator"role="form" class="form-group">
           <label for="">Data da Consulta</label>
-          <c-input-group>
+            <c-input-group>
               <mat-form-field appearance="fill">
                   <mat-label>Escolha uma data</mat-label>
                   <input matInput [matDatepicker]="picker" [value]="consultaData" formControlName="dataConsulta">
@@ -14,8 +14,16 @@
                   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-          </c-input-group>
-          <label style="margin-top: 20px;" or="">Horario da Consulta</label>
+            </c-input-group>
+            <label style="margin-top: 20px;" or="">Procedimento</label>
+              <c-input-group class="mb-3">
+                <select  formControlName="procedimento" class="form-control" aria-label="Default select example" cSelect>
+                    <option value="null" selected>-- SELECIONE --</option>
+                  
+                    <option value="{{procedimento}}" *ngFor="let procedimento of procedimentos">{{procedimento}}</option>
+              </select>
+              </c-input-group>     
+          <label style="margin-top: 10px;" or="">Horario da Consulta</label>
               <c-input-group class="mb-3"style="margin-top: 10px;">
                   <input aria-describedby="basic-addon2"
                           [value]="horarioConsulta"
@@ -117,12 +125,12 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let consultas of paciente.consul; let z = index"> 
-                             
+                            
                               <td *ngIf="consultas.isDeleted != 1">
                                 {{consultas.dataConsulta}} 
                               </td>
-                              <td>
-                                {{paciente.procedimento}}
+                              <td *ngIf="consultas.isDeleted != 1">
+                                {{consultas.procedimento}}
                               </td>
                               <td *ngIf="consultas.isDeleted != 1">
                                 {{consultas.horarioConsulta}}
