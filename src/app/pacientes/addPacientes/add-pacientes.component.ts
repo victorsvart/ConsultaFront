@@ -27,7 +27,7 @@ export class AddPacientesComponent implements OnInit{
           age: [null, Validators.required],
           nascimento: [null, Validators.required],
           telefone: [null, Validators.required],
-          rg: [null, Validators.required],
+          cpf: [null, Validators.required],
           procedimentosRealizados: [[], Validators.required],
           consul: [[], Validators.required],
           laudo: [null, Validators.required],

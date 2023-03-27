@@ -45,8 +45,9 @@
   </c-modal-footer>
 </c-modal>
 
-
+<button cButton color="success" style="float:right" (click)="convertExcel()" size="sm">Converter para Excel</button>
 <c-pagination aria-label="Próximo paciente">
+
   <table cTable>
     <tbody>
       <tr *ngFor="let paciente of pacientes; let i = index">
@@ -63,7 +64,7 @@
                 <table cTable class="overflow-auto">
                     <thead>
                       <th>
-                        RG
+                        CPF
                       </th>
                       <th>
                         IDADE
@@ -81,7 +82,7 @@
                     </thead>
                     <tbody>
                       <td>
-                        {{paciente.rg}}
+                        {{paciente.cpf}}
                       </td>
                       <td>
                         {{paciente.age}}

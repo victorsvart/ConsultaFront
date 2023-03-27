@@ -29,7 +29,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { DateAdapter } from '@angular/material/core';
 import { FlatpickrModule } from 'angularx-flatpickr';
-
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,

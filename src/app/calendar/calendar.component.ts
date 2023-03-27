@@ -110,7 +110,7 @@ export class CalendarComponent implements OnInit{
 
   async ngOnInit(){
     await this.getAllPacientes();
-    this.addDates();
+    await this.addDates();
     
     
   }
@@ -163,10 +163,12 @@ export class CalendarComponent implements OnInit{
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
+          
           ...event,
           start: newStart,
           end: newEnd,
         };
+
       }
       return iEvent;
     });

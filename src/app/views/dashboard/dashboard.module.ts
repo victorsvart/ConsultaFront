@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {
@@ -28,6 +28,7 @@ import { ModalModule } from '@coreui/angular';
 import { WidgetsModule } from '../widgets/widgets.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule,
     MatInputModule,
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
 })
 export class DashboardModule {
 }
