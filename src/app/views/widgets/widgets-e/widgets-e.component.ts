@@ -68,7 +68,7 @@ export class WidgetsEComponent implements AfterContentInit {
   }
 
   get randomData() {
-    const data = [];
+    const data: number[] = [];
     for (let i = 0; i < 15; i++) {
       data.push(this.random);
     }

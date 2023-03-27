@@ -20,11 +20,11 @@ export class ServicesService {
     console.log(paciente);
     return this.http.post<PacienteRequest>('http://localhost:8080/api/consulta/addPaciente', paciente);
   }
-  addConsulta(rg: string, consulta: consultas){
-    console.log(rg);
-    return this.http.post<consultas>('http://localhost:8080/api/consulta/addConsulta/'+ rg, consulta);
+  addConsulta(cpf: string, consulta: consultas){
+    console.log(cpf);
+    return this.http.post<consultas>('http://localhost:8080/api/consulta/addConsulta/'+ cpf, consulta);
   }
-  updateConsulta(rg: string, pos: number, consulta: consultas){
-    return this.http.post<consultas>('http://localhost:8080/api/consulta/updateConsulta/'+ rg + '/' + pos, consulta);
+  updateConsulta(cpf: string, pos: number, consulta: consultas){
+    return this.http.post<consultas>('http://localhost:8080/api/consulta/updateConsulta/'+ cpf + '/' + pos, consulta);
   }
 }

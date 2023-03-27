@@ -14,7 +14,7 @@ export class AddConsultasComponent implements OnInit{
 
   public visible = false;
   form: FormGroup;
-  pacienteRG: any;
+  pacienteCPF: any;
   procedimentos: string[] = ["Limpeza", "Restauração", "Exame"];
   selectedProcedimento: string = '';
 
@@ -26,6 +26,7 @@ export class AddConsultasComponent implements OnInit{
 
   ngOnInit() {
     this.service.getAllPatients().subscribe(data => {
+      //console.log(data);
       this.pacientes = data;
     });
     this.form = this.fb.group({
@@ -39,7 +40,8 @@ export class AddConsultasComponent implements OnInit{
 
   openModal(i: any) {
     this.visible = !this.visible;
-    this.pacienteRG = this.pacientes[i].rg;
+    this.pacienteCPF = this.pacientes[i].cpf;
+    console.log(this.pacienteCPF);
 
   }
   openModal2() {
@@ -58,7 +60,7 @@ export class AddConsultasComponent implements OnInit{
   
 
   onSubmit() {
-    this.service.addConsulta(this.pacienteRG, this.form.value).subscribe();
+    this.service.addConsulta(this.pacienteCPF, this.form.value).subscribe();
     this.openModal2();
   }
 }

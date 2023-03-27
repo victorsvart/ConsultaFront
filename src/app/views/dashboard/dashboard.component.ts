@@ -1,12 +1,16 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {ServicesService} from '../../services/services.service';
+import { DatePipe } from '@angular/common';
+import { Pacientes } from 'src/app/interfaces/pacientes';
+import * as XLSX from 'xlsx';
 
 
 
 @Component({
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['dashboard.component.scss']
+  styleUrls: ['dashboard.component.scss'],
+  providers: [DatePipe]
 })
 
 
@@ -14,23 +18,23 @@ import {ServicesService} from '../../services/services.service';
 
 export class DashboardComponent implements OnInit {
     pacientes:any;
+    consultas: any;
     public visible = false;
     form: FormGroup;
-    constructor(private service:ServicesService, private fb:FormBuilder) { }
+    constructor(private service:ServicesService, private fb:FormBuilder, private datepipe: DatePipe){ }
     pacienteRG: any;
     consultaData = new Date();
     horarioConsulta: any;
     pos: number;
     procedimentos: string[] = ["Limpeza", "Restauração", "Exame"];
     selectedProcedimento: string = '';
-
+    date: any;
     consultaGet: any;
     horarioGet: any;
     procedimentoGet: any;
     isDeletedGet: any;
 
-   
-
+  
 
 
 
@@ -43,16 +47,20 @@ export class DashboardComponent implements OnInit {
     
     ngOnInit() {
       this.getAllPatients();
+      
       this.form = this.fb.group({
         dataConsulta: [null, Validators.required],
         horarioConsulta: [null, Validators.required],
         procedimento: [null, Validators.required],
         isDeleted: [0, Validators.required]
       });
+  
       
 
 
     }
+    
+
    
     
     public getAllPatients(){
@@ -60,10 +68,17 @@ export class DashboardComponent implements OnInit {
         (data)=>{
          this.pacientes = data, (error: any) => console.error(error);
          console.log(this.pacientes);
+         this.pacientes.forEach((paciente) =>{
+          paciente.consul.forEach((consulta) =>{
+            consulta.dataConsulta = this.datepipe.transform(consulta.dataConsulta, 'dd/MM/yyyy');
+          })
+
+         })
         }
 
       )
     }
+ 
     openModal(i: any, z: any) {
       this.visible = !this.visible;
       this.pos = z;
@@ -100,11 +115,37 @@ export class DashboardComponent implements OnInit {
         console.log(response);
       });
 
-     
-
     }
 
- 
+    public convertExcel(){
+      const data = this.pacientes.map(paciente => {
+      const consultas = paciente.consul.map(consulta => consulta.dataConsulta);
+        return {
+          Nome: paciente.firstName + ' ' + paciente.lastName,
+          CPF: paciente.cpf,
+          Endereco: paciente.endereco,
+          Idade: paciente.age,
+          Nascimento: paciente.nascimento,
+          Telefone: paciente.telefone,
+          Consultas: consultas.join(', ')
+          //'Last Consultation': this.datepipe.transform(lastConsulta, 'dd-MM-yyyy')
+        };
+      });
+    
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, 'patients');
+    }
+
+    private saveAsExcelFile(buffer: any, fileName: string): void {
+      const data: Blob = new Blob([buffer], {type: 'application/octet-stream'});
+      const url: string = window.URL.createObjectURL(data);
+      const link: any = document.createElement('a');
+      link.href = url;
+      link.download = fileName + '.xlsx';
+      link.click();
+    }
      
 
    
