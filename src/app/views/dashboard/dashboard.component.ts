@@ -147,10 +147,4 @@ export class DashboardComponent implements OnInit {
       link.click();
     }
      
-
-   
-   
-
-
-  
 }
