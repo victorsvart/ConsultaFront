@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import {
   AvatarModule,
   ButtonGroupModule,
@@ -62,6 +61,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
   ],
   declarations: [DashboardComponent],
+  providers: [DatePipe],
 })
 export class DashboardModule {
 }

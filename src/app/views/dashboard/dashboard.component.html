@@ -9,7 +9,7 @@
             <c-input-group>
               <mat-form-field appearance="fill">
                   <mat-label>Escolha uma data</mat-label>
-                  <input matInput [matDatepicker]="picker" [value]="consultaData" formControlName="dataConsulta">
+                  <input matInput [matDatepicker]="picker"  [value]="consultaData" formControlName="dataConsulta">
                   <mat-hint>DD/MM/YYYY</mat-hint>
                   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
@@ -73,9 +73,6 @@
                         ENDEREÇO
                       </th>
                       <th>
-                        NASCIMENTO
-                      </th>
-                      <th>
                         TELEFONE
                       </th>
                     
@@ -89,9 +86,6 @@
                       </td>
                       <td>
                         {{paciente.endereco}}
-                      </td>
-                      <td>
-                        {{paciente.nascimento}}
                       </td>
                       <td>
                         {{paciente.telefone}}
