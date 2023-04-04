@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ServicesService } from 'src/app/services/services.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-consultas',
   templateUrl: './add-consultas.component.html',
   styleUrls: ['./add-consultas.component.scss']
 })
 export class AddConsultasComponent implements OnInit{
-  constructor(private service: ServicesService, private fb:FormBuilder, private adapter:DateAdapter<Date>) {
+  constructor(private service: ServicesService, private fb:FormBuilder, private adapter:DateAdapter<Date>, private route: Router) {
     this.adapter.setLocale('pt-BR');
    }
 
@@ -62,5 +63,6 @@ export class AddConsultasComponent implements OnInit{
   onSubmit() {
     this.service.addConsulta(this.pacienteCPF, this.form.value).subscribe();
     this.openModal2();
+    this.route.navigate(['/pacientes']);
   }
 }

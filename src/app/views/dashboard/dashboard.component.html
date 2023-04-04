@@ -34,20 +34,17 @@
                   />
               </c-input-group>            
       </div>
-
-
   </c-modal-body>
   <c-modal-footer>
     <button (click)="openModal2()" cButton color="secondary">
       Close
     </button>
-    <button (click)="onSubmit()" type="submit" cButton color="primary">Save changes</button>
+    <button (click)="onSubmit()" type="submit" cButton color="primary">Salvar Mudanças</button>
   </c-modal-footer>
 </c-modal>
 
 <button cButton color="success" style="float:right" (click)="convertExcel()" size="sm">Converter para Excel</button>
 <c-pagination aria-label="Próximo paciente">
-
   <table cTable>
     <tbody>
       <tr *ngFor="let paciente of pacientes; let i = index">
@@ -60,6 +57,9 @@
             </ng-template>
             <ng-template cTemplateId="accordionBodyTemplate">
               <div class="accordion-body">
+
+                <button cButton *ngIf="paciente.consul == ''" (click)="navigateToConsultas()" color="primary" size="sm" style="float:right">Adicionar Consulta</button>
+                
                 <h2 class="text-danger" *ngIf="paciente.consul == ''">Nenhuma Consulta Registrada</h2>
                 <table cTable class="overflow-auto">
                     <thead>
