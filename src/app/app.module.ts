@@ -19,7 +19,6 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { LoginModule } from './login/login.module';
-import { TesteModule } from './teste/teste.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { AddPacientesModule } from './pacientes/add-pacientes.module';
@@ -143,7 +142,6 @@ const APP_CONTAINERS = [
     MdbTooltipModule,
     MdbValidationModule,
     LoginModule,
-    TesteModule,
     HttpClientModule,
     FormModule,
     MatExpansionModule,

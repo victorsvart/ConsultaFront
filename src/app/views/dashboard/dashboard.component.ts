@@ -4,6 +4,9 @@ import {ServicesService} from '../../services/services.service';
 import { DatePipe } from '@angular/common';
 import { Pacientes } from 'src/app/interfaces/pacientes';
 import * as XLSX from 'xlsx';
+import { DateAdapter } from '@angular/material/core';
+import { Location } from '@angular/common';
+
 
 
 
@@ -20,9 +23,13 @@ export class DashboardComponent implements OnInit {
     pacientes:any;
     consultas: any;
     public visible = false;
+    public popvisible = false;
     form: FormGroup;
-    constructor(private service:ServicesService, private fb:FormBuilder, private datepipe: DatePipe){ }
-    pacienteRG: any;
+    constructor(private service:ServicesService, private fb:FormBuilder, private datepipe: DatePipe, private dateadapter: DateAdapter<Date>, private location: Location){
+      this.dateadapter.setLocale('pt-BR');
+     }
+    pacienteCPF: any;
+    pacienteProcedimento: any;
     consultaData = new Date();
     horarioConsulta: any;
     pos: number;
@@ -33,7 +40,11 @@ export class DashboardComponent implements OnInit {
     horarioGet: any;
     procedimentoGet: any;
     isDeletedGet: any;
-
+    formattedDate: any;
+    temp: any;
+    dateToString:any;
+    wasPacientUpdated: number = 1;
+     
   
 
 
@@ -80,10 +91,12 @@ export class DashboardComponent implements OnInit {
     }
  
     openModal(i: any, z: any) {
+      
       this.visible = !this.visible;
       this.pos = z;
-      this.pacienteRG = this.pacientes[i].rg;
+      this.pacienteCPF = this.pacientes[i].cpf;
       this.consultaData = this.pacientes[i].consul[z].dataConsulta;
+      
       this.horarioConsulta = this.pacientes[i].consul[z].horarioConsulta;
       this.selectedProcedimento = this.pacientes[i].consul[z].procedimento;
     
@@ -92,6 +105,7 @@ export class DashboardComponent implements OnInit {
     }
     openModal2() {
       this.visible = !this.visible;
+      
   
   
     }
@@ -99,21 +113,34 @@ export class DashboardComponent implements OnInit {
       this.visible = event;
     }
     onSubmit(){
-      this.service.updateConsulta(this.pacienteRG, this.pos, this.form.value).subscribe();
+      this.service.updateConsulta(this.pacienteCPF, this.pos, this.form.value).subscribe();
       this.openModal2();
+      
 
     }
     deleteConsulta(i: any, z: any){
-      this.pacienteRG = this.pacientes[i].rg;
+      this.pacienteCPF = this.pacientes[i].cpf;
       this.consultaData = this.pacientes[i].consul[z].dataConsulta;
       this.horarioConsulta = this.pacientes[i].consul[z].horarioConsulta;
+      this.pacienteProcedimento = this.pacientes[i].consul[z].procedimento;
       this.pos = z;
+
+      this.dateToString = this.consultaData.toString();
+      this.temp = this.dateToString.replace(/\//g, '-');
+
+      this.formattedDate = new Date(this.temp);
+      
+
+
       this.form.controls['isDeleted'].setValue(1);
-      this.form.controls['dataConsulta'].setValue(this.consultaData);
-      this.form.controls['horarioConsulta'].setValue(this.horarioConsulta);
-      this.service.updateConsulta(this.pacienteRG, this.pos, this.form.value).subscribe(response => {
-        console.log(response);
-      });
+      this.form.controls['dataConsulta'].setValue(this.formattedDate);
+      this.form.controls['horarioConsulta'].setValue(this.formattedDate);
+      this.form.controls['procedimento'].setValue(this.pacienteProcedimento);
+      this.service.updateConsulta(this.pacienteCPF, this.pos, this.form.value).subscribe();
+      location.reload();
+      
+      
+      
 
     }
 
@@ -146,6 +173,7 @@ export class DashboardComponent implements OnInit {
       link.download = fileName + '.xlsx';
       link.click();
     }
+
      
 
    
