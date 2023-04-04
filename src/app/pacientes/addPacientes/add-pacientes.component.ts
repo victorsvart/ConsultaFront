@@ -4,6 +4,7 @@ import { ServicesService } from '../../services/services.service';
 import { DateAdapter } from '@angular/material/core';
 import {NgxMaskDirective} from 'ngx-mask';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-pacientes',
@@ -15,7 +16,7 @@ export class AddPacientesComponent implements OnInit{
   form: FormGroup;
   date = new Date();
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private service:ServicesService, private adapter:DateAdapter<Date>) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private service:ServicesService, private adapter:DateAdapter<Date>, private route: Router) {
     this.adapter.setLocale('pt-BR');
    }
 
@@ -43,10 +44,9 @@ export class AddPacientesComponent implements OnInit{
    }
 
    onSubmit() {
-    this.service.addPacientes(this.form.value).subscribe(response => {
-     
-      console.log(response);
-    });
+    this.service.addPacientes(this.form.value).subscribe();
+    this.route.navigate(['/pacientes']);
+
    }
 
     

@@ -6,6 +6,7 @@ import { Pacientes } from 'src/app/interfaces/pacientes';
 import * as XLSX from 'xlsx';
 import { DateAdapter } from '@angular/material/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -25,7 +26,12 @@ export class DashboardComponent implements OnInit {
     public visible = false;
     public popvisible = false;
     form: FormGroup;
-    constructor(private service:ServicesService, private fb:FormBuilder, private datepipe: DatePipe, private dateadapter: DateAdapter<Date>, private location: Location){
+    constructor(private service:ServicesService, 
+      private fb:FormBuilder, 
+      private datepipe: DatePipe, 
+      private dateadapter: DateAdapter<Date>, 
+      private location: Location,
+      private router: Router){
       this.dateadapter.setLocale('pt-BR');
      }
     pacienteCPF: any;
@@ -96,7 +102,6 @@ export class DashboardComponent implements OnInit {
       this.pos = z;
       this.pacienteCPF = this.pacientes[i].cpf;
       this.consultaData = this.pacientes[i].consul[z].dataConsulta;
-      
       this.horarioConsulta = this.pacientes[i].consul[z].horarioConsulta;
       this.selectedProcedimento = this.pacientes[i].consul[z].procedimento;
     
@@ -115,8 +120,7 @@ export class DashboardComponent implements OnInit {
     onSubmit(){
       this.service.updateConsulta(this.pacienteCPF, this.pos, this.form.value).subscribe();
       this.openModal2();
-      
-
+      location.reload();
     }
     deleteConsulta(i: any, z: any){
       this.pacienteCPF = this.pacientes[i].cpf;
@@ -138,10 +142,10 @@ export class DashboardComponent implements OnInit {
       this.form.controls['procedimento'].setValue(this.pacienteProcedimento);
       this.service.updateConsulta(this.pacienteCPF, this.pos, this.form.value).subscribe();
       location.reload();
-      
-      
-      
+    }
 
+    public navigateToConsultas(){
+      this.router.navigate(['consultas/AddConsultas']);
     }
 
     public convertExcel(){
